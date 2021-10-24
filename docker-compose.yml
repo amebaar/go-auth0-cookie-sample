@@ -4,10 +4,10 @@ services:
     build: "./frontend"
     container_name: "frontend"
     volumes:
-      - ./:/usr/src/app
+      - ./frontend:/usr/src/app
     ports:
       - "3000:3000"
-    command: sh -c "cd frontend && yarn start"
+    command: sh -c "yarn start"
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
@@ -16,10 +16,10 @@ services:
     container_name: "server"
     tty: true
     volumes:
-      - ./:/go/src/work # マウントディレクトリ指定
+      - ./server:/go/src/work
     ports:
       - "8080:8080"
-    command: sh -c "cd server && go run main.go"
+    command: sh -c "go run main.go"
     stdin_open: true
   redis:
     image: "redis:latest"
