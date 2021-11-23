@@ -9,4 +9,5 @@ require (
 	github.com/gin-gonic/gin v1.7.4
 	github.com/joho/godotenv v1.4.0
 	golang.org/x/oauth2 v0.0.0-20211005180243-6b3c2da341f1
+	gopkg.in/auth0.v5 v5.21.1
 )

@@ -22,6 +22,7 @@ const User = () => {
     .then((res) => {
       setUser(res.data.name)
       setIsLogin(user !== "")
+      console.log(res.data)
     })
     .catch((error) => {
       setUser("")

@@ -10,7 +10,8 @@ import (
 // IsAuthenticated is a middleware that checks if
 // the user has already been authenticated previously.
 func IsAuthenticated(ctx *gin.Context) {
-	if sessions.Default(ctx).Get("profile") == nil {
+	profile := sessions.Default(ctx).Get("profile")
+	if profile == nil {
 		ctx.AbortWithStatus(http.StatusBadRequest)
 	} else {
 		ctx.Next()

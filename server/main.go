@@ -2,11 +2,14 @@ package main
 
 import (
 	"github.com/gin-contrib/sessions/redis"
+	"go-auth0-cookie-sample/auth/policy"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/joho/godotenv"
 
+	"go-auth0-cookie-sample/auth"
 	"go-auth0-cookie-sample/auth/authenticator"
 	"go-auth0-cookie-sample/router"
 )
@@ -16,7 +19,7 @@ func main() {
 		log.Fatalf("Failed to load the env vars: %v", err)
 	}
 
-	auth, err := authenticator.New()
+	au, err := authenticator.New()
 	if err != nil {
 		log.Fatalf("Failed to initialize the authenticator: %v", err)
 	}
@@ -34,7 +37,10 @@ func main() {
 
 	*/
 
-	rtr := router.New(auth, store)
+	cl := auth.GetAuth0Client()
+	policy.InitPolicyManager(cl, os.Getenv("AUTH0_API_IDENTIFIER"))
+
+	rtr := router.New(au, store)
 
 	log.Print("Server listening on http://localhost:8080/")
 	if err := http.ListenAndServe("0.0.0.0:8080", rtr); err != nil {
