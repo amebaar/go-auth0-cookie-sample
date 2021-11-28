@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS `casbin`;
+GRANT ALL ON *.* TO docker;
