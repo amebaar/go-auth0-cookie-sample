@@ -1,6 +1,6 @@
 module go-auth0-cookie-sample
 
-go 1.16
+go 1.17
 
 require (
 	github.com/coreos/go-oidc/v3 v3.1.0

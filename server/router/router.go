@@ -45,7 +45,7 @@ func New(auth *authenticator.Authenticator, store redis.Store) *gin.Engine {
 
 	router.GET("/login", handler.Login(auth))
 	router.GET("/callback", handler.Callback(auth))
-	router.GET("/user", middleware.IsAuthenticated, handler.User)
+	router.GET("/me", middleware.IsAuthenticated, handler.User)
 	router.GET("/logout", handler.Logout)
 	router.GET("/read", middleware.HasPermissionFuncBuilder("read", "sample"), handler.User)
 	router.GET("/create", middleware.HasPermissionFuncBuilder("create", "sample"), handler.User)

@@ -15,7 +15,7 @@ const User = () => {
 
   useEffect(() => {
     // ログイン状況を取得
-    axios.get("http://localhost:8080/user",
+    axios.get("http://localhost:8080/me",
         {
           withCredentials: true
         })
