@@ -2,6 +2,7 @@ package controller
 
 import (
 	"github.com/labstack/echo/v4"
+	"go-auth0-cookie-sample/api/app/usecase/inputport"
 	"net/http"
 )
 
@@ -13,21 +14,27 @@ type UserController interface {
 	Delete(ctx echo.Context) error
 }
 
-type userController struct{}
+type userController struct {
+	userUsecase inputport.UserUsecase
+}
 
 func NewUserController() UserController {
 	return &userController{}
 }
 
 func (u userController) List(ctx echo.Context) error {
-	return ctx.String(http.StatusOK, ctx.Get("cid").(string))
+	users, err := u.userUsecase.List(ctx)
+	if err != nil {
+		return echo.ErrInternalServerError
+	}
+	return ctx.JSON(http.StatusOK, users)
 }
 
 func (u userController) Create(ctx echo.Context) error {
 	return ctx.String(http.StatusOK, ctx.Get("cid").(string))
 }
 
-func (u userController) Detail(ctx echo.Context) error {
+func (u *userController) Detail(ctx echo.Context) error {
 	return ctx.String(http.StatusOK, ctx.Get("cid").(string))
 }
 

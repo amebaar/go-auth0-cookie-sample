@@ -6,7 +6,7 @@ import (
 )
 
 type UserRepository interface {
-	GetByCompany(ctx context.Context, company model.Company) (model.Users, error)
-	GetByID(ctx context.Context, user model.User) (model.Users, error)
-	Create(ctx context.Context, user model.User) error
+	GetByCompany(ctx context.Context, company *model.Company) (model.Users, error)
+	GetByID(ctx context.Context, user *model.User) (model.Users, error)
+	Create(ctx context.Context, user *model.User) error
 }

@@ -41,7 +41,6 @@ func (e *Enforcer) Enforce(next echo.HandlerFunc) echo.HandlerFunc {
 
 		method := ctx.Request().Method
 		path := ctx.Request().URL.Path
-		ctx.Logger().Infof("%v, %s, %s, %s", roles, "cid"+cid, path, method)
 
 		hasGrants := false
 		for _, r := range roles {
