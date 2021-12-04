@@ -1,18 +1,22 @@
 version: "3"
 services:
   node:
-    build: "./frontend"
+    build:
+      context: "./frontend"
+      dockerfile: "Dockerfile"
     container_name: "frontend"
     volumes:
       - ./frontend:/usr/src/app
     ports:
       - "3000:3000"
-    command: sh -c "yarn start"
+    command: sh -c "yarn add react-scripts && yarn start"
     stdin_open: true
     environment:
       - CHOKIDAR_USEPOLLING=true
   go:
-    build: "./server"
+    build:
+      context: "./server"
+      dockerfile: "Dockerfile"
     container_name: "server"
     tty: true
     volumes:
@@ -27,4 +31,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - "./data/redis:/data"
+      - "redis-db:/data"
+volumes:
+  redis-db:
+    driver: local
